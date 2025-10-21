@@ -1,0 +1,108 @@
+/* Stage holds the background image */
+.stage{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.frame{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.background-gif{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw; /* full-bleed */
+  height: auto;
+  min-height: 100vh;
+  object-fit: cover; /* fill while preserving aspect ratio */
+}
+
+/* Keyframe animation for fade in/out */
+@keyframes fadeInOut {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+/* Overlay text centered over the GIF */
+.overlay-text{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.1) 90%, rgba(0,0,0,0) 100%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 600;
+  transition: all 0.3s ease;
+  animation: fadeInOut 3s ease-in-out infinite;
+  backdrop-filter: blur(3px);
+  box-shadow: 
+    0 0 40px rgba(0,0,0,0.4),
+    inset 0 0 30px rgba(255,255,255,0.05),
+    0 10px 25px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.overlay-text h1{ margin: 0 0 6px 0; font-size: 1.6rem; }
+.overlay-text p{ margin: 0; font-size: 1rem; opacity: 0.95; }
+
+/* Make the overlay area clickable */
+.overlay-link{ 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: inherit; 
+  text-decoration: none;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.overlay-link:hover{ 
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 40%, rgba(255,255,255,0.04) 70%, rgba(255,255,255,0.01) 90%, rgba(255,255,255,0) 100%);
+  transform: scale(1.05);
+  cursor: pointer;
+  box-shadow: 
+    0 0 50px rgba(255,255,255,0.2),
+    inset 0 0 40px rgba(255,255,255,0.1),
+    0 15px 35px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 480px){
+  .overlay-text { 
+    width: 250px; 
+    height: 250px; 
+  }
+  .overlay-text h1{ font-size: 1.2rem; }
+  .overlay-text p{ font-size: 0.9rem; }
+}
+
+@media (max-width: 320px){
+  .overlay-text { 
+    width: 200px; 
+    height: 200px; 
+  }
+  .overlay-text h1{ font-size: 1rem; }
+  .overlay-text p{ font-size: 0.8rem; }
+}
+
+/* Church icon positioned over the GIF */
+/* church icon styles removed */
+
+

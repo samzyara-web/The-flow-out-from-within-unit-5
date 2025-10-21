@@ -1,0 +1,227 @@
+/* Heart page styles */
+.heart-stage{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.heart-frame{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+}
+
+/* Camera feed as background with thermal imaging effect */
+.camera-background{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scaleX(-1);
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 1;
+  /* Thermal imaging effects - remove grayscale to allow colors */
+  filter: 
+    contrast(2.5) 
+    brightness(0.6) 
+    hue-rotate(180deg) 
+    saturate(4)
+    invert(0.2);
+}
+
+/* Thermal color overlay */
+.thermal-overlay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  z-index: 1.5;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(255, 0, 0, 0.7) 0%, transparent 40%),
+    radial-gradient(circle at 70% 70%, rgba(255, 255, 0, 0.6) 0%, transparent 35%),
+    radial-gradient(circle at 50% 20%, rgba(255, 165, 0, 0.5) 0%, transparent 30%),
+    radial-gradient(circle at 20% 80%, rgba(0, 255, 255, 0.4) 0%, transparent 45%),
+    linear-gradient(135deg, 
+      rgba(0, 0, 255, 0.4) 0%,
+      rgba(0, 255, 255, 0.4) 20%,
+      rgba(0, 255, 0, 0.4) 40%,
+      rgba(255, 255, 0, 0.5) 60%,
+      rgba(255, 165, 0, 0.5) 80%,
+      rgba(255, 0, 0, 0.6) 100%
+    );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  animation: thermalPulse 3s ease-in-out infinite;
+}
+
+/* Animation for thermal effect */
+@keyframes thermalPulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* Heart GIF overlay with 10% opacity when camera is working */
+.heart-background-gif{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: auto;
+  min-height: 100vh;
+  object-fit: cover;
+  opacity: 0.1;
+  z-index: 2;
+  transition: opacity 0.5s ease;
+}
+
+/* Heart GIF with 50% opacity when camera is not available */
+.no-camera .heart-background-gif{
+  opacity: 0.5;
+}
+
+/* Floating animation keyframes */
+@keyframes float {
+  0%, 100% { 
+    transform: translate(-50%, -50%) translateY(0px);
+  }
+  50% { 
+    transform: translate(-50%, -50%) translateY(-15px);
+  }
+}
+
+@keyframes floatTitle {
+  0%, 100% { 
+    transform: translateY(0px);
+  }
+  50% { 
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes floatText {
+  0%, 100% { 
+    transform: translateY(0px);
+  }
+  50% { 
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes floatSignature {
+  0%, 100% { 
+    transform: translateY(0px);
+  }
+  50% { 
+    transform: translateY(-6px);
+  }
+}
+
+/* Overlay text centered over everything with floating effect */
+.heart-overlay-text{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0.3) 90%, rgba(0,0,0,0) 100%);
+  color: #fff;
+  padding: 30px 40px;
+  border-radius: 30px;
+  text-align: center;
+  max-width: 80%;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+  box-shadow: 
+    0 0 30px rgba(0,0,0,0.5),
+    inset 0 0 40px rgba(255,255,255,0.05),
+    0 8px 32px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+  animation: float 4s ease-in-out infinite;
+}
+
+.heart-overlay-text h1{ 
+  margin: 0 0 20px 0; 
+  font-size: 2.2rem; 
+  font-weight: bold;
+  color: #ff6b9d;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  animation: floatTitle 3s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.manifesto-content {
+  margin: 20px 0;
+  line-height: 1.6;
+  animation: floatText 3.5s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.manifesto-content p{ 
+  margin: 8px 0; 
+  font-size: 1.1rem; 
+  font-style: italic;
+  opacity: 0.95; 
+}
+
+.signature {
+  margin: 25px 0 20px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffb3d1;
+  animation: floatSignature 2.8s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+@keyframes floatButton {
+  0%, 100% { 
+    transform: translateY(0px);
+  }
+  50% { 
+    transform: translateY(-4px);
+  }
+}
+
+.back-link {
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  background: rgba(255,255,255,0.2);
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.3);
+  animation: floatButton 2.5s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.back-link:hover {
+  background: rgba(255,255,255,0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Responsive design */
+@media (max-width: 768px){
+  .heart-overlay-text {
+    padding: 20px 25px;
+  }
+  .heart-overlay-text h1{ font-size: 1.8rem; }
+  .manifesto-content p{ font-size: 1rem; }
+}
+
+@media (max-width: 480px){
+  .heart-overlay-text {
+    padding: 15px 20px;
+    max-width: 90%;
+  }
+  .heart-overlay-text h1{ font-size: 1.5rem; }
+  .manifesto-content p{ font-size: 0.9rem; }
+  .signature { font-size: 0.9rem; }
+}

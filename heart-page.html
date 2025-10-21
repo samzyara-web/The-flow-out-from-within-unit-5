@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Heart Background - The Flow Out From Within</title>
+    <link rel="stylesheet" href="heart-page.css" />
+    <script>
+      // Auto redirect to main page after 60 seconds
+      setTimeout(function() {
+        window.location.href = 'index.html';
+      }, 60000); // 60000 milliseconds = 60 seconds
+
+      // Camera access functionality
+      async function startCamera() {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ 
+            video: { 
+              width: { ideal: 1920 }, 
+              height: { ideal: 1080 } 
+            } 
+          });
+          const video = document.getElementById('camera-feed');
+          video.srcObject = stream;
+          video.play();
+          // Camera is working, show it and keep heart at 10% opacity
+          video.style.display = 'block';
+          document.body.classList.remove('no-camera');
+        } catch (error) {
+          console.error('Error accessing camera:', error);
+          // Fallback: hide camera video, add no-camera class to increase heart opacity to 50%
+          const video = document.getElementById('camera-feed');
+          video.style.display = 'none';
+          document.body.classList.add('no-camera');
+          // Also hide thermal overlay when no camera
+          document.querySelector('.thermal-overlay').style.display = 'none';
+        }
+      }
+
+      // Start camera when page loads
+      window.addEventListener('load', startCamera);
+    </script>
+  </head>
+  <body>
+    <main class="heart-stage">
+      <div class="heart-frame">
+        <!-- Camera feed as background -->
+        <video id="camera-feed" class="camera-background" autoplay muted playsinline></video>
+        <!-- Thermal overlay for camera -->
+        <div class="thermal-overlay"></div>
+        <!-- Heart background GIF as overlay with opacity -->
+        <img class="heart-background-gif" src="./Heart Background.GIF" alt="Heart Background GIF" />
+        <!-- overlay text on top of everything -->
+        <div class="heart-overlay-text" role="region" aria-label="Manifesto text">
+          <h1>The Flow Out From Within</h1>
+          <div class="manifesto-content">
+            <p>Outer expression is the manifestation of the inner man but mans interpretation of outer expression can be awfully limited leading to misunderstanding</p>
+            <p>Perhaps to truly understand we must take off our flesh and look into one anothers soul...</p>
+          </div>
+          <p class="signature">— Samara Fullerton</p>
+          <a href="index.html" class="back-link">← Return</a>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
